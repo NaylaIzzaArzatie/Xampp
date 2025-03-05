@@ -1,155 +1,55 @@
-Microsoft Windows [Version 10.0.22631.4890]
-(c) Microsoft Corporation. All rights reserved.
+-- MariaDB dump 10.19  Distrib 10.4.32-MariaDB, for Win64 (AMD64)
+--
+-- Host: localhost    Database: WEEKTIGA
+-- ------------------------------------------------------
+-- Server version	10.4.32-MariaDB
 
-C:\Users\LENOVO>CD C:\xampp1\mysql\bin
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-C:\xampp1\mysql\bin>mysql -u root -p
-Enter password:
-Welcome to the MariaDB monitor.  Commands end with ; or \g.
-Your MariaDB connection id is 31
-Server version: 10.4.32-MariaDB mariadb.org binary distribution
+--
+-- Table structure for table `modulempat`
+--
 
-Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+DROP TABLE IF EXISTS `modulempat`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `modulempat` (
+  `NPM` char(5) NOT NULL,
+  `Nama` varchar(25) NOT NULL,
+  `Tempat_Lahir` varchar(30) NOT NULL,
+  `Tanggal_Lahir` date NOT NULL,
+  `Jenis_Kelamin` enum('L','P') NOT NULL,
+  `No_HP` varchar(25) NOT NULL,
+  PRIMARY KEY (`NPM`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+--
+-- Dumping data for table `modulempat`
+--
 
-MariaDB [(none)]> CREATE DATABASE WEEKTIGA;
-Query OK, 1 row affected (0.002 sec)
+LOCK TABLES `modulempat` WRITE;
+/*!40000 ALTER TABLE `modulempat` DISABLE KEYS */;
+INSERT INTO `modulempat` VALUES ('6052','Nayla','Temanggung','2005-10-16','P','085900001114'),('6091','Naren','Wonosobo','2007-11-02','L','085901012005'),('6092','Zizi','Semarang','2007-06-28','P','085901012006'),('6094','Dimas','Magelang','2005-12-23','L','085900001115');
+/*!40000 ALTER TABLE `modulempat` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
-MariaDB [(none)]> USE WEEKTIGA
-Database changed
-MariaDB [WEEKTIGA]> CREATE TABLE MODULEMPAT (
-    -> NPM CHAR(5) Primary Key NOT NULL,
-    -> Nama VARCHAR(25) NOT NULL,
-    -> Tempat_Lahir VARCHAR(30) NOT NULL,
-    -> Tanggal_Lahir Date NOT NULL,
-    -> Jenis_Kelamin Enum('L','P') NOT NULL,
-    -> No_HP VARCHAR(25) NOT NULL
-    -> );
-Query OK, 0 rows affected (0.024 sec)
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
-MariaDB [WEEKTIGA]> SHOW TABLES;
-+--------------------+
-| Tables_in_weektiga |
-+--------------------+
-| modulempat         |
-+--------------------+
-1 row in set (0.001 sec)
-
-MariaDB [WEEKTIGA]> DESC MODULEMPAT;
-+---------------+---------------+------+-----+---------+-------+
-| Field         | Type          | Null | Key | Default | Extra |
-+---------------+---------------+------+-----+---------+-------+
-| NPM           | char(5)       | NO   | PRI | NULL    |       |
-| Nama          | varchar(25)   | NO   |     | NULL    |       |
-| Tempat_Lahir  | varchar(30)   | NO   |     | NULL    |       |
-| Tanggal_Lahir | date          | NO   |     | NULL    |       |
-| Jenis_Kelamin | enum('L','P') | NO   |     | NULL    |       |
-| No_HP         | varchar(25)   | NO   |     | NULL    |       |
-+---------------+---------------+------+-----+---------+-------+
-6 rows in set (0.029 sec)
-
-MariaDB [WEEKTIGA]> INSERT INTO MODULEMPAT VALUES ('6052', 'Nayla', 'Temanggung', '2005/10/16', 'p', '085900001114');
-Query OK, 1 row affected (0.012 sec)
-
-MariaDB [WEEKTIGA]> select * from MODULEMPAT;
-+------+-------+--------------+---------------+---------------+--------------+
-| NPM  | Nama  | Tempat_Lahir | Tanggal_Lahir | Jenis_Kelamin | No_HP        |
-+------+-------+--------------+---------------+---------------+--------------+
-| 6052 | Nayla | Temanggung   | 2005-10-16    | P             | 085900001114 |
-+------+-------+--------------+---------------+---------------+--------------+
-1 row in set (0.001 sec)
-
-MariaDB [WEEKTIGA]> INSERT INTO MODULEMPAT VALUES ('6091', 'Narend', 'Wonosobo', '2007/11/02', 'L', '085901012005');
-Query OK, 1 row affected (0.003 sec)
-
-MariaDB [WEEKTIGA]> INSERT INTO MODULEMPAT VALUES ('6092', 'Alvita', 'Semarang', '2007/06/28', 'p', '085901012006');
-Query OK, 1 row affected (0.011 sec)
-
-MariaDB [WEEKTIGA]> INSERT INTO MODULEMPAT VALUES ('6093', 'Adhyasta', 'Jogja', '2006/06/06', 'L', '085901012007');
-Query OK, 1 row affected (0.011 sec)
-
-MariaDB [WEEKTIGA]> INSERT INTO MODULEMPAT VALUES ('6094', 'Dimas', 'Magelang', '2005/12/23', 'L', '085900001115');
-Query OK, 1 row affected (0.011 sec)
-
-MariaDB [WEEKTIGA]> select * from MODULEMPAT;
-+------+----------+--------------+---------------+---------------+--------------+
-| NPM  | Nama     | Tempat_Lahir | Tanggal_Lahir | Jenis_Kelamin | No_HP        |
-+------+----------+--------------+---------------+---------------+--------------+
-| 6052 | Nayla    | Temanggung   | 2005-10-16    | P             | 085900001114 |
-| 6091 | Narend   | Wonosobo     | 2007-11-02    | L             | 085901012005 |
-| 6092 | Alvita   | Semarang     | 2007-06-28    | P             | 085901012006 |
-| 6093 | Adhyasta | Jogja        | 2006-06-06    | L             | 085901012007 |
-| 6094 | Dimas    | Magelang     | 2005-12-23    | L             | 085900001115 |
-+------+----------+--------------+---------------+---------------+--------------+
-5 rows in set (0.001 sec)
-
-MariaDB [WEEKTIGA]> UPDATE `MODULEMPAT` SET `Nama` = 'Naren' WHERE NPM = '6091';
-Query OK, 1 row affected (0.011 sec)
-Rows matched: 1  Changed: 1  Warnings: 0
-
-MariaDB [WEEKTIGA]> SELECT * FROM MODULEMPAT;
-+------+----------+--------------+---------------+---------------+--------------+
-| NPM  | Nama     | Tempat_Lahir | Tanggal_Lahir | Jenis_Kelamin | No_HP        |
-+------+----------+--------------+---------------+---------------+--------------+
-| 6052 | Nayla    | Temanggung   | 2005-10-16    | P             | 085900001114 |
-| 6091 | Naren    | Wonosobo     | 2007-11-02    | L             | 085901012005 |
-| 6092 | Alvita   | Semarang     | 2007-06-28    | P             | 085901012006 |
-| 6093 | Adhyasta | Jogja        | 2006-06-06    | L             | 085901012007 |
-| 6094 | Dimas    | Magelang     | 2005-12-23    | L             | 085900001115 |
-+------+----------+--------------+---------------+---------------+--------------+
-5 rows in set (0.001 sec)
-
-MariaDB [WEEKTIGA]> UPDATE `MODULEMPAT` SET `Nama` = 'Zizi' WHERE NPM = '6092';
-Query OK, 1 row affected (0.003 sec)
-Rows matched: 1  Changed: 1  Warnings: 0
-
-MariaDB [WEEKTIGA]> SELECT * FROM MODULEMPAT;
-+------+----------+--------------+---------------+---------------+--------------+
-| NPM  | Nama     | Tempat_Lahir | Tanggal_Lahir | Jenis_Kelamin | No_HP        |
-+------+----------+--------------+---------------+---------------+--------------+
-| 6052 | Nayla    | Temanggung   | 2005-10-16    | P             | 085900001114 |
-| 6091 | Naren    | Wonosobo     | 2007-11-02    | L             | 085901012005 |
-| 6092 | Zizi     | Semarang     | 2007-06-28    | P             | 085901012006 |
-| 6093 | Adhyasta | Jogja        | 2006-06-06    | L             | 085901012007 |
-| 6094 | Dimas    | Magelang     | 2005-12-23    | L             | 085900001115 |
-+------+----------+--------------+---------------+---------------+--------------+
-5 rows in set (0.001 sec)
-
-MariaDB [WEEKTIGA]> DELETE FROM `MODULEMPAT` WHERE `NPM` = '6093';
-Query OK, 1 row affected (0.011 sec)
-
-MariaDB [WEEKTIGA]> SELECT * FROM MODULEMPAT;
-+------+-------+--------------+---------------+---------------+--------------+
-| NPM  | Nama  | Tempat_Lahir | Tanggal_Lahir | Jenis_Kelamin | No_HP        |
-+------+-------+--------------+---------------+---------------+--------------+
-| 6052 | Nayla | Temanggung   | 2005-10-16    | P             | 085900001114 |
-| 6091 | Naren | Wonosobo     | 2007-11-02    | L             | 085901012005 |
-| 6092 | Zizi  | Semarang     | 2007-06-28    | P             | 085901012006 |
-| 6094 | Dimas | Magelang     | 2005-12-23    | L             | 085900001115 |
-+------+-------+--------------+---------------+---------------+--------------+
-4 rows in set (0.001 sec)
-
-MariaDB [WEEKTIGA]> SELECT NPM, Nama, Jenis_Kelamin FROM MODULEMPAT WHERE Jenis_Kelamin = 'L';
-+------+-------+---------------+
-| NPM  | Nama  | Jenis_Kelamin |
-+------+-------+---------------+
-| 6091 | Naren | L             |
-| 6094 | Dimas | L             |
-+------+-------+---------------+
-2 rows in set (0.001 sec)
-
-MariaDB [WEEKTIGA]> SELECT NPM, Nama, No_HP, Jenis_Kelamin FROM MODULEMPAT WHERE Jenis_Kelamin = 'L';
-+------+-------+--------------+---------------+
-| NPM  | Nama  | No_HP        | Jenis_Kelamin |
-+------+-------+--------------+---------------+
-| 6091 | Naren | 085901012005 | L             |
-| 6094 | Dimas | 085900001115 | L             |
-+------+-------+--------------+---------------+
-2 rows in set (0.001 sec)
-
-MariaDB [WEEKTIGA]> exit
-Bye
-
-C:\xampp1\mysql\bin>mysqldump -u root -p WEEKTIGA > D:\TugasModul4_DBMS_2440506052.sql
-Enter password:
+-- Dump completed on 2025-03-05 22:37:03
