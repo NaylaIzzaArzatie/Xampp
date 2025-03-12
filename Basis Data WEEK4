@@ -1,0 +1,295 @@
+Microsoft Windows [Version 10.0.22631.4890]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\LENOVO>CD C:\xampp\mysql\bin
+
+C:\xampp\mysql\bin>mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 23
+Server version: 10.4.32-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> CREATE DATABASE TOKO_ARZA;
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [(none)]> USE TOKO_ARZA;
+Database changed
+MariaDB [TOKO_ARZA]> CREATE TABLE PRODUCTS (
+    -> product_id INT PRIMARY KEY AUTO_INCREMENT,
+    -> product_name VARCHAR(100),
+    -> category VARCHAR(50),
+    -> price DECIMAL(10, 2)
+    -> );
+Query OK, 0 rows affected (0.022 sec)
+
+MariaDB [TOKO_ARZA]> INSERT INTO products (product_name, category, price) VALUES
+    -> ('Laptop A', 'Electronics', 1200.00)
+    -> ('Smartphone B', 'Electronics', 800.00);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '('Smartphone B', 'Electronics', 800.00)' at line 3
+MariaDB [TOKO_ARZA]> INSERT INTO products (product_name, category, price) VALUES
+    -> ('Laptop A', 'Electronics', 1200.00),
+    -> ('Smartphone B', 'Electronics', 800.00),
+    -> ('Tablet C', 'Electronics', 500.00),
+    -> ('Shirt D', 'Clothing', 25.00),
+    -> ('Jeans E', 'Clothing', 45.00),
+    -> ('Shoes F', 'Clothing', 60.00),
+    -> ('Book G', 'Books', 15.00),
+    -> ('Notebook H', 'Books', 10,00),
+    -> ('Pen I', 'Stationery', 2.00),
+    -> ('Pencil J', 'Stationery', 1.50);
+ERROR 1136 (21S01): Column count doesn't match value count at row 8
+MariaDB [TOKO_ARZA]> INSERT INTO products (product_name, category, price) VALUES
+    -> ('Laptop A', 'Electronics', 1200.00),
+    -> ('Smartphone B', 'Electronics', 800.00),
+    -> ('Tablet C', 'Electronics', 500.00),
+    -> ('Shirt D', 'Clothing', 25.00),
+    -> ('Jeans E', 'Clothing', 45.00),
+    -> ('Shoes F', 'Clothing', 60.00),
+    -> ('Book G', 'Books', 15.00),
+    -> ('Notebook H', 'Books', 10.00),
+    -> ('Pen I', 'Stationery', 2.00),
+    -> ('Pencil J', 'Stationery', 1.50);
+Query OK, 10 rows affected (0.011 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+MariaDB [TOKO_ARZA]> select * from products;
++------------+--------------+-------------+---------+
+| product_id | product_name | category    | price   |
++------------+--------------+-------------+---------+
+|          1 | Laptop A     | Electronics | 1200.00 |
+|          2 | Smartphone B | Electronics |  800.00 |
+|          3 | Tablet C     | Electronics |  500.00 |
+|          4 | Shirt D      | Clothing    |   25.00 |
+|          5 | Jeans E      | Clothing    |   45.00 |
+|          6 | Shoes F      | Clothing    |   60.00 |
+|          7 | Book G       | Books       |   15.00 |
+|          8 | Notebook H   | Books       |   10.00 |
+|          9 | Pen I        | Stationery  |    2.00 |
+|         10 | Pencil J     | Stationery  |    1.50 |
++------------+--------------+-------------+---------+
+10 rows in set (0.001 sec)
+
+MariaDB [TOKO_ARZA]> SELECT COUNT(*) AS total_products FROM products;
++----------------+
+| total_products |
++----------------+
+|             10 |
++----------------+
+1 row in set (0.001 sec)
+
+MariaDB [TOKO_ARZA]> SELECT SUM(price) AS total_price FROM products;
++-------------+
+| total_price |
++-------------+
+|     2658.50 |
++-------------+
+1 row in set (0.001 sec)
+
+MariaDB [TOKO_ARZA]> SELECT(price) AS average_price FROM products;
++---------------+
+| average_price |
++---------------+
+|       1200.00 |
+|        800.00 |
+|        500.00 |
+|         25.00 |
+|         45.00 |
+|         60.00 |
+|         15.00 |
+|         10.00 |
+|          2.00 |
+|          1.50 |
++---------------+
+10 rows in set (0.001 sec)
+
+MariaDB [TOKO_ARZA]> SELECT AVG(price) AS average_price FROM products;
++---------------+
+| average_price |
++---------------+
+|    265.850000 |
++---------------+
+1 row in set (0.001 sec)
+
+MariaDB [TOKO_ARZA]> SELECT MIN(price) AS cheapest_product, MAX(price) AS most_expensive_product FROM products;
++------------------+------------------------+
+| cheapest_product | most_expensive_product |
++------------------+------------------------+
+|             1.50 |                1200.00 |
++------------------+------------------------+
+1 row in set (0.001 sec)
+
+MariaDB [TOKO_ARZA]> SELECT * FROM products WHERE price > 50;
++------------+--------------+-------------+---------+
+| product_id | product_name | category    | price   |
++------------+--------------+-------------+---------+
+|          1 | Laptop A     | Electronics | 1200.00 |
+|          2 | Smartphone B | Electronics |  800.00 |
+|          3 | Tablet C     | Electronics |  500.00 |
+|          6 | Shoes F      | Clothing    |   60.00 |
++------------+--------------+-------------+---------+
+4 rows in set (0.001 sec)
+
+MariaDB [TOKO_ARZA]> SELECT * FROM products WHERE category = 'Electronics';
++------------+--------------+-------------+---------+
+| product_id | product_name | category    | price   |
++------------+--------------+-------------+---------+
+|          1 | Laptop A     | Electronics | 1200.00 |
+|          2 | Smartphone B | Electronics |  800.00 |
+|          3 | Tablet C     | Electronics |  500.00 |
++------------+--------------+-------------+---------+
+3 rows in set (0.001 sec)
+
+MariaDB [TOKO_ARZA]> SELECT * FROM products WHERE price BETWEEN 20 AND 100;
++------------+--------------+----------+-------+
+| product_id | product_name | category | price |
++------------+--------------+----------+-------+
+|          4 | Shirt D      | Clothing | 25.00 |
+|          5 | Jeans E      | Clothing | 45.00 |
+|          6 | Shoes F      | Clothing | 60.00 |
++------------+--------------+----------+-------+
+3 rows in set (0.001 sec)
+
+MariaDB [TOKO_ARZA]> SELECT * FROM products WHERE product_name LIKE 'S%';
++------------+--------------+-------------+--------+
+| product_id | product_name | category    | price  |
++------------+--------------+-------------+--------+
+|          2 | Smartphone B | Electronics | 800.00 |
+|          4 | Shirt D      | Clothing    |  25.00 |
+|          6 | Shoes F      | Clothing    |  60.00 |
++------------+--------------+-------------+--------+
+3 rows in set (0.001 sec)
+
+MariaDB [TOKO_ARZA]> SELECT category, COUNT(*) AS total_products
+    -> FROM products
+    -> GROUP BY category;
++-------------+----------------+
+| category    | total_products |
++-------------+----------------+
+| Books       |              2 |
+| Clothing    |              3 |
+| Electronics |              3 |
+| Stationery  |              2 |
++-------------+----------------+
+4 rows in set (0.001 sec)
+
+MariaDB [TOKO_ARZA]> SELECT category, AVG
+    -> ;
+ERROR 1054 (42S22): Unknown column 'category' in 'field list'
+MariaDB [TOKO_ARZA]> SELECT category, AVG(price) AS average_price
+    -> FROM products
+    -> GROUP BY category;
++-------------+---------------+
+| category    | average_price |
++-------------+---------------+
+| Books       |     12.500000 |
+| Clothing    |     43.333333 |
+| Electronics |    833.333333 |
+| Stationery  |      1.750000 |
++-------------+---------------+
+4 rows in set (0.001 sec)
+
+MariaDB [TOKO_ARZA]> SELECT category, AVG(price) AS average_price
+    -> FROM products
+    -> GROUP BY category
+    -> HAVING AVG(price) > 100;
++-------------+---------------+
+| category    | average_price |
++-------------+---------------+
+| Electronics |    833.333333 |
++-------------+---------------+
+1 row in set (0.001 sec)
+
+MariaDB [TOKO_ARZA]> SELECT category, COUNT(*) AS total_products
+    -> FROM products
+    -> GROUP BY category
+    -> HAVING COUNT(*) > 2;
++-------------+----------------+
+| category    | total_products |
++-------------+----------------+
+| Clothing    |              3 |
+| Electronics |              3 |
++-------------+----------------+
+2 rows in set (0.001 sec)
+
+MariaDB [TOKO_ARZA]> SELECT SUM(price) AS total_price
+    -> FROM products
+    -> WHERE category = 'Electronics';
++-------------+
+| total_price |
++-------------+
+|     2500.00 |
++-------------+
+1 row in set (0.001 sec)
+
+MariaDB [TOKO_ARZA]> SELECT category, SUM(price) AS total_price
+    -> FROM products
+    -> GROUP BY category
+    -> HAVING SUM(price) > 100;
++-------------+-------------+
+| category    | total_price |
++-------------+-------------+
+| Clothing    |      130.00 |
+| Electronics |     2500.00 |
++-------------+-------------+
+2 rows in set (0.001 sec)
+
+MariaDB [TOKO_ARZA]> SELECT category, MAX(price) AS max_price
+    -> FROM products
+    -> GROUP BY category;
++-------------+-----------+
+| category    | max_price |
++-------------+-----------+
+| Books       |     15.00 |
+| Clothing    |     60.00 |
+| Electronics |   1200.00 |
+| Stationery  |      2.00 |
++-------------+-----------+
+4 rows in set (0.001 sec)
+
+MariaDB [TOKO_ARZA]> SELECT category, MIN(price) AS min_price
+    -> FROM products
+    -> GROUP BY category;
++-------------+-----------+
+| category    | min_price |
++-------------+-----------+
+| Books       |     10.00 |
+| Clothing    |     25.00 |
+| Electronics |    500.00 |
+| Stationery  |      1.50 |
++-------------+-----------+
+4 rows in set (0.001 sec)
+
+MariaDB [TOKO_ARZA]> SELECT category, MAX(price) AS max_price
+    -> FROM products
+    -> GROUP BY category
+    -> HAVING MAX(price) > 500;
++-------------+-----------+
+| category    | max_price |
++-------------+-----------+
+| Electronics |   1200.00 |
++-------------+-----------+
+1 row in set (0.001 sec)
+
+MariaDB [TOKO_ARZA]> SELECT category, COUNT(*) AS total_products, SUM(price) AS total_harga
+    -> FROM products
+    -> GROUP BY category
+    -> HAVING COUNT(*) > 1;
++-------------+----------------+-------------+
+| category    | total_products | total_harga |
++-------------+----------------+-------------+
+| Books       |              2 |       25.00 |
+| Clothing    |              3 |      130.00 |
+| Electronics |              3 |     2500.00 |
+| Stationery  |              2 |        3.50 |
++-------------+----------------+-------------+
+4 rows in set (0.001 sec)
+
+MariaDB [TOKO_ARZA]> bye
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'bye' at line 1
+MariaDB [TOKO_ARZA]> exit
+Bye
